@@ -3,16 +3,19 @@ package com.example.project;
 import java.util.Scanner;
 
 public class Interface {
-    private int option = -1;
-    private BookStore bookStore;
-    private Scanner scan = new Scanner(System.in);
+    private int option = -1; // Stores the user's menu choice
+    private BookStore bookStore; // Reference to the bookstore instance
+    private Scanner scan = new Scanner(System.in); // Scanner for user input
 
+    // Constructor to initialize the interface with a BookStore object
     public Interface(BookStore bookStore) {
         this.bookStore = bookStore;
     }
 
+    // Main method to run the interface loop
     public void run() {
-        while (option != 0) {
+        while (option != 0) { // Loop until user exits
+            // Display menu options
             System.out.println("*************************** Welcome to the GFG Library ***************************");
             System.out.println("                          Select From The Following Options:");
             System.out.println("**********************************************************************************");
@@ -27,35 +30,37 @@ public class Interface {
             System.out.println("Press 8 to Check In a Book.");
             System.out.println("**********************************************************************************");
 
-            option = scan.nextInt();
+            option = scan.nextInt(); // Read user input for menu selection
             scan.nextLine(); // Clear the input buffer
 
+            // Handle menu options
             if (option == 0) {
                 System.out.println("Thank you for visiting!");
             } else if (option == 1) {
-                addBook();
+                addBook(); // Add a new book
             } else if (option == 2) {
-                upgradeBookQuantity();
+                upgradeBookQuantity(); // Upgrade book quantity
             } else if (option == 3) {
-                searchBook();
+                searchBook(); // Search for a book
             } else if (option == 4) {
-                showAllBooks();
+                showAllBooks(); // Display all books
             } else if (option == 5) {
-                registerStudent();
+                registerStudent(); // Register a new student
             } else if (option == 6) {
-                showAllRegisteredStudents();
+                showAllRegisteredStudents(); // Display all registered students
             } else if (option == 7) {
-                checkOutBook();
+                checkOutBook(); // Check out a book
             } else if (option == 8) {
-                checkInBook();
+                checkInBook(); // Check in a book
             } else {
-                System.out.println("Invalid option. Please try again.");
+                System.out.println("Invalid option. Please try again."); // Handle invalid input
             }
         }
 
-        scan.close();
+        scan.close(); // Close the scanner
     }
 
+    // Adds a new book to the bookstore
     private void addBook() {
         System.out.print("Enter title: ");
         String title = scan.nextLine();
@@ -70,10 +75,11 @@ public class Interface {
         int quantity = scan.nextInt();
 
         Book bookAdded = new Book(title, author, yearPublished, isbn, quantity);
-        bookStore.addBook(bookAdded);
+        bookStore.addBook(bookAdded); // Add book to the store
         System.out.println("Book added successfully!\n");
     }
 
+    // Upgrades the quantity of an existing book
     private void upgradeBookQuantity() {
         System.out.print("Enter the title of the book to upgrade: ");
         String title = scan.nextLine();
@@ -83,7 +89,7 @@ public class Interface {
             if (book != null && book.getTitle().equalsIgnoreCase(title)) {
                 System.out.print("Enter the quantity to add: ");
                 int quantity = scan.nextInt();
-                book.setQuantity(book.getQuantity() + quantity);
+                book.setQuantity(book.getQuantity() + quantity); // Update book quantity
                 System.out.println("Quantity updated successfully! New quantity: " + book.getQuantity());
                 return;
             }
@@ -92,6 +98,7 @@ public class Interface {
         System.out.println("Book not found.\n");
     }
 
+    // Searches for a book by title, author, or ISBN
     private void searchBook() {
         System.out.print("Enter the title, author, or ISBN to search: ");
         String searchTerm = scan.nextLine();
@@ -109,17 +116,19 @@ public class Interface {
         System.out.println("Book not found.\n");
     }
 
+    // Displays all books in the bookstore
     private void showAllBooks() {
         Book[] books = bookStore.getBooks();
         System.out.println("Available Books:");
         for (Book book : books) {
             if (book != null) {
-                System.out.println(book.bookInfo());
+                System.out.println(book.bookInfo()); // Display book info
             }
         }
         System.out.println();
     }
 
+    // Registers a new student in the system
     private void registerStudent() {
         System.out.print("Enter student's full name: ");
         String name = scan.nextLine();
@@ -127,21 +136,23 @@ public class Interface {
         String id = scan.nextLine();
 
         User newUser = new User(name, id);
-        bookStore.addUser(newUser);
+        bookStore.addUser(newUser); // Add student to the system
         System.out.println("Student registered successfully!\n");
     }
 
+    // Displays all registered students
     private void showAllRegisteredStudents() {
         User[] users = bookStore.getUsers();
         System.out.println("Registered Students:");
         for (User user : users) {
             if (user != null) {
-                System.out.println(user.userInfo());
+                System.out.println(user.userInfo()); // Display user info
             }
         }
         System.out.println();
     }
 
+    // Checks out a book for a student
     private void checkOutBook() {
         System.out.print("Enter your student ID: ");
         String studentId = scan.nextLine();
@@ -150,7 +161,7 @@ public class Interface {
         User user = null;
         for (User u : users) {
             if (u != null && u.getId().equals(studentId)) {
-                user = u;
+                user = u; // Find the user
                 break;
             }
         }
@@ -167,7 +178,7 @@ public class Interface {
         for (Book book : books) {
             if (book != null && book.getTitle().equalsIgnoreCase(title)) {
                 if (book.getQuantity() > 0) {
-                    book.setQuantity(book.getQuantity() - 1);
+                    book.setQuantity(book.getQuantity() - 1); // Decrease quantity
                     System.out.println("Book checked out successfully: " + book.getTitle());
                     return;
                 } else {
@@ -180,6 +191,7 @@ public class Interface {
         System.out.println("Book not found.\n");
     }
 
+    // Checks in a book for a student
     private void checkInBook() {
         System.out.print("Enter your student ID: ");
         String studentId = scan.nextLine();
@@ -188,7 +200,7 @@ public class Interface {
         User user = null;
         for (User u : users) {
             if (u != null && u.getId().equals(studentId)) {
-                user = u;
+                user = u; // Find the user
                 break;
             }
         }
@@ -204,7 +216,7 @@ public class Interface {
 
         for (Book book : books) {
             if (book != null && book.getTitle().equalsIgnoreCase(title)) {
-                book.setQuantity(book.getQuantity() + 1);
+                book.setQuantity(book.getQuantity() + 1); // Increase quantity
                 System.out.println("Book checked in successfully: " + book.getTitle());
                 return;
             }
