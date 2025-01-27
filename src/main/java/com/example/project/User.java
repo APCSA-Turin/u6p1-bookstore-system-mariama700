@@ -1,24 +1,74 @@
 package com.example.project;
 
-public class User{
-    //requires 3 private attributes String name, String Id, Book book that is initialized to empty
+public class User {
+    // Private attributes
+    private String name;
+    private String id;
+    private Book[] books; // Array of Book objects, initially null
 
-    //requires 1 contructor with two parameters that will initialize the name and id
- 
-    // public  getName() {}
+    // Constructor with two parameters
+    public User(String name, String id) {
+        this.name = name;
+        this.id = id;
+        this.books = new Book[5]; // Initialize with a fixed array size (5 books max)
+    }
 
-    // public  setName() {}
+    // Getter for name
+    public String getName() {
+        return name;
+    }
 
-    // public  getId() {}
+    // Setter for name
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    // public void setId() {}
+    // Getter for ID
+    public String getId() {
+        return id;
+    }
 
-    // public getBooks() {}
+    // Setter for ID
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    // public setBooks() {}
+    // Getter for book by index
+    public Book getBook(int index) {
+        // Check for valid index before accessing the array
+        if (index >= 0 && index < books.length) {
+            return books[index]; // Get specific book by index
+        } else {
+            return null; // Return null if the index is out of bounds
+        }
+    }
 
-    // public String bookListInfo(){} //returns a booklist for the user, if empty, output "empty"
+    // Setter for books array
+    public void setBooks(Book[] books) {
+        // Ensure that books array is not null and has a valid size
+        if (books != null && books.length <= 5) {
+            this.books = books;
+        }
+    }
 
-    // public String userInfo(){} //returns  "Name: []\nID: []\nBooks:\n[]"
-       
+    // Method to return book list information, returns "empty" if no book is assigned
+    public String bookListInfo() {
+        String result = "";
+        for (Book book : books) {
+            if (book != null) {
+                result += book.bookInfo() + "\n"; // Add book info if it's not null
+            } else {
+                result += "empty\n"; // Indicate an empty slot if the book is null
+            }
+        }
+        return result;
+    }
+
+    // Method to return user information
+    public String userInfo() {
+        return "Name: " + name + "\n" +
+               "Id: " + id + "\n" +
+               "Books: \n" +
+               bookListInfo(); // Append the book list information
+    }
 }

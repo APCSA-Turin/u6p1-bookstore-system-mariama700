@@ -1,30 +1,75 @@
 package com.example.project;
 
 public class Book{
-    //requires 5 attributes String title, String author, int yearPublished, String isbn, int quantity
+    // private attribures
+    private String title;
+    private String author;
+    private int yearPublished;
+    private String isbn;
+    private int quantity;
 
-    //requires 1 constructor with 5 arguments that intitialize the attribtues of the class.
+    // 1 constructor with 5 arguments that intitialize the attribtues of the class
+    public Book(String title, String author, int yearPublished, String isbn, int quantity) {
+        this.title = title;
+        this.author = author;
+        this.yearPublished = yearPublished;
+        this.isbn = isbn;
+        this.quantity = quantity;
+    }
 
-    // public  getTitle() {}
+    // getter method for title
+    public String getTitle() {
+        return title;
+    }
 
-    // public setTitle() {}
+    // setter method for title
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-    // public getAuthor() {}
+    // getter method for author
+    public String getAuthor() {
+        return author;
+    }
 
-    // public setAuthor() {}
+    // setter method for author
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-    // public getYearPublished() {}
+    // getter method for year published
+    public int getYearPublished() {
+        return yearPublished;
+    }
 
-    // public setYearPublished() {}
+    // setter method for year published
+    public void setYearPublished(int yearPublished) {
+        this.yearPublished = yearPublished;
+    }
 
-    // public getIsbn() {}
+    // getter method for isbn
+    public String getIsbn() {
+        return isbn;
+    }
 
-    // public void setIsbn() {}
+    // setter method for isbn
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
-    // public int getQuantity() {}
+    // getter method for quantity
+    public int getQuantity() {
+        return quantity;
+    }
 
-    // public void setQuantity() {}
+    // setter method for quantity
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-    // public  bookInfo(){} //returns "Title: [], Author: [], Year: [], ISBN: [], Quantity: []"
-       
+    // returns "Title: [], Author: [], Year: [], ISBN: [], Quantity: []
+    public String bookInfo() {
+        String str = "Title: " + title + ", Author: " + author + ", Year: " + yearPublished + ", ISBN: " + isbn + ", Quantity: " + quantity;
+        return str;
+    }
 }
